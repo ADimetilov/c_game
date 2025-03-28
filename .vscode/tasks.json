@@ -1,0 +1,52 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: windres compile .rc to .res",
+            "command": "C:\\MinGW\\bin\\windres.exe",
+            "args": [
+                "${fileDirname}\\source.rc",
+                "-O", "coff",
+                "-o",
+                "${fileDirname}\\source.res"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [],
+            "detail": "Task to compile .rc file to .res"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc build active file",
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "${fileDirname}\\source.res",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-luser32",
+                "-lgdi32",
+                "-lcomdlg32",
+                "-mwindows"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "C/C++: windres compile .rc to .res"
+            ],
+            "detail": "Task for building WinAPI application"
+        }
+    ]
+}
